@@ -20,12 +20,29 @@
     }
 
     #mapBtns {
-        margin-left: 500px;
-        margin-top: -300px;
+        /*margin-left: 50px;*/
+        /*margin-top: 70px;*/
     }
 
     .box {
         width: 500px;
+    }
+
+    .list {
+        padding-top: 350px;
+    }
+
+    .col1 {
+        width: 150px;
+        float: left;
+        /*background-color: blue;*/
+    }
+
+    .col2 {
+        width: 200px;
+        margin-left: 150px;
+        /*float: left;*/
+        /*background-color: green;*/
     }
 </style>
 <script>
@@ -70,13 +87,13 @@
     }
 </script>
 
-<div class="row container box">
-    @*<div class="col-1-1">
-            <h3 style="background: orange!important;">You must join a topic to see posts</h3>
-        </div>*@
-    <div class="col-1-2">
-        <h3 style="background:green ;">Student Info</h3>
-        <div class="col-1-2">
+<div class="list">
+    <div class="col-1-1">
+        <h3 style="background: orange!important;">You must join a topic to see posts</h3>
+    </div>
+    <h3 style="background:green ;">Student Info</h3>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+        <div class="col1">
             <ul>
                 <li>
                     <a href="http://outlook.com/mail.itsligo.ie">My Email</a>
@@ -92,7 +109,8 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2-2" style="margin-left:20%; margin-top: -8.5%; padding-top:10px;">
+        <div class="col2">
+            @*<div class="col-2-2" style="margin-left:20%; margin-top: -8.5%; padding-top:10px;">*@
             <ul>
                 <li>
                     <a href="https://ssb.ancheim.ie/its/app/twbkwbis.P_GenMenu?name=homepage">Register Here</a>
@@ -109,13 +127,8 @@
             </ul>
         </div>
     </div>
-    @*<div class="col-2-2">
-            <h3 style="background:green ;">Student Account</h3>
-
-        </div>*@
-
-    <div id="map" class="col-1-1"></div>
-    <div id="mapBtns" class="col-2-2">
+    <div id="map" class="col-xs-1 col-sm-1 col-md-1"></div>
+    <div id="mapBtns" class="col-xs-1 col-sm-1 col-md-1">
         <input type="button" class="btn btn-primary" onclick="createITSligoMarker()" value="Find IT Sligo" />
         <br />
         <input type="button" class="btn btn-primary" onclick="createITSUMarker()" value="Find IT Sligo Student Union" />
@@ -127,3 +140,58 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYD9T7_o0xTIt2EWIPMLuCEHKqqjzvpkc&callback=initMap"
             async defer></script>
 </div>
+
+
+
+
+
+
+
+
+@*<div class="container">
+            <div class="row">
+
+
+
+    @*<div class="col-xs-1 col-sm-1 col-md-1">
+                <div class="col-2-2" style="margin-left:20%; margin-top: -8.5%; padding-top:10px;">
+                <ul>
+                    <li>
+                        <a href="https://ssb.ancheim.ie/its/app/twbkwbis.P_GenMenu?name=homepage">Register Here</a>
+                    </li>
+                    <li>
+                        <a href="https://ssb.ancheim.ie/its/app/twbkwbis.P_GenMenu?name=homepage">Payments</a>
+                    </li>
+                    <li>
+                        <a href="https://epayments.itsligo.ie/getmypin/default.aspx">Student PIN</a>
+                    </li>
+                    <li>
+                        <a href="https://password.itsligo.ie/ssrpm/">Reset Student Password</a>
+                    </li>
+                </ul>
+            </div>
+        </div>*@
+
+
+
+
+@*</div>*@
+@*</div>*@
+@*<div class="col-2-2">
+        <h3 style="background:green ;">Student Account</h3>
+
+    </div>*@
+
+@*<div id="map" class="col-xs-1 col-sm-1 col-md-1"></div>
+    <div id="mapBtns" class="col-xs-1 col-sm-1 col-md-1">
+        <input type="button" class="btn btn-primary" onclick="createITSligoMarker()" value="Find IT Sligo" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="createITSUMarker()" value="Find IT Sligo Student Union" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="createITKAMarker()" value="Find IT Sligo Knocknarea Arena" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="initMap()" value="Re-center Map" />
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYD9T7_o0xTIt2EWIPMLuCEHKqqjzvpkc&callback=initMap"
+            async defer></script>*@
+@*</div>*@
