@@ -19,8 +19,10 @@ namespace EduCom2.Controllers
         // GET: api/Posts
         public IQueryable<Post> GetPosts()
         {
+
             return db.Posts;
         }
+
 
         // GET: api/Posts/5
         [ResponseType(typeof(Post))]

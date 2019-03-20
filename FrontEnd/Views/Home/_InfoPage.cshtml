@@ -1,0 +1,129 @@
+﻿@*@{
+        ViewBag.Title = "Home Page";
+    }*@
+<style>
+    #map {
+        height: 400px;
+        width: 400px;
+        margin: 10px;
+    }
+
+    .btn {
+        margin: 5px;
+    }
+
+    h3 {
+        color: white;
+        padding: 2px;
+        text-align: center;
+        width: auto;
+    }
+
+    #mapBtns {
+        margin-left: 500px;
+        margin-top: -300px;
+    }
+
+    .box {
+        width: 500px;
+    }
+</style>
+<script>
+    var map;
+    var marker;
+    var lat = 54.2785534;
+    var lng = -8.4622789;
+
+    function initMap() {
+        var sligo = new google.maps.LatLng(54.2798728, -8.4682673);
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: sligo, zoom: 14
+        });
+
+    }
+    function createITSligoMarker() {
+        var itsligo = new google.maps.LatLng(54.2785534, -8.4622789);
+        marker = new google.maps.Marker({
+            position: itsligo,
+            map: map
+        });
+        map.setZoom(17);
+        map.panTo(marker.position);
+    }
+    function createITSUMarker() {
+        var itsligo = new google.maps.LatLng(54.278213, -8.4625394);
+        marker = new google.maps.Marker({
+            position: itsligo,
+            map: map
+        });
+        map.setZoom(17);
+        map.panTo(marker.position);
+    }
+    function createITKAMarker() {
+        var itsligo = new google.maps.LatLng(54.2792468, -8.4676447);
+        marker = new google.maps.Marker({
+            position: itsligo,
+            map: map
+        });
+        map.setZoom(17);
+        map.panTo(marker.position);
+    }
+</script>
+
+<div class="row container box">
+    @*<div class="col-1-1">
+            <h3 style="background: orange!important;">You must join a topic to see posts</h3>
+        </div>*@
+    <div class="col-1-2">
+        <h3 style="background:green ;">Student Info</h3>
+        <div class="col-1-2">
+            <ul>
+                <li>
+                    <a href="http://outlook.com/mail.itsligo.ie">My Email</a>
+                </li>
+                <li>
+                    <a href="http://timetables.itsligo:81/studentset.htm">My Timetable</a>
+                </li>
+                <li>
+                    <a href="https://vle.itsligo.ie">Moodle</a>
+                </li>
+                <li>
+                    <a href="http://pcounter.itsligo.ie">Student Printing</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-2-2" style="margin-left:20%; margin-top: -8.5%; padding-top:10px;">
+            <ul>
+                <li>
+                    <a href="https://ssb.ancheim.ie/its/app/twbkwbis.P_GenMenu?name=homepage">Register Here</a>
+                </li>
+                <li>
+                    <a href="https://ssb.ancheim.ie/its/app/twbkwbis.P_GenMenu?name=homepage">Payments</a>
+                </li>
+                <li>
+                    <a href="https://epayments.itsligo.ie/getmypin/default.aspx">Student PIN</a>
+                </li>
+                <li>
+                    <a href="https://password.itsligo.ie/ssrpm/">Reset Student Password</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @*<div class="col-2-2">
+            <h3 style="background:green ;">Student Account</h3>
+
+        </div>*@
+
+    <div id="map" class="col-1-1"></div>
+    <div id="mapBtns" class="col-2-2">
+        <input type="button" class="btn btn-primary" onclick="createITSligoMarker()" value="Find IT Sligo" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="createITSUMarker()" value="Find IT Sligo Student Union" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="createITKAMarker()" value="Find IT Sligo Knocknarea Arena" />
+        <br />
+        <input type="button" class="btn btn-primary" onclick="initMap()" value="Re-center Map" />
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYD9T7_o0xTIt2EWIPMLuCEHKqqjzvpkc&callback=initMap"
+            async defer></script>
+</div>
