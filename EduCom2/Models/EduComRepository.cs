@@ -12,7 +12,7 @@ namespace EduCom2.Models
         EduContext ectx = new EduContext();
         ApplicationDbContext actx = new ApplicationDbContext();
 
-       
+     
 
         public ApplicationUser getUserByID(string id)
         {
