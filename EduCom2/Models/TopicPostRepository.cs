@@ -6,8 +6,16 @@ using System.Web;
 
 namespace EduCom2.Models
 {
-    public class TopicPostRepository
+    public class TopicPostRepository: ITopic
     {
-   
+        EduContext ectx = new EduContext();
+
+        //method to display all topics on info page
+            public List <Topic> GetAllTopics()
+        {
+            var topicList = ectx.Topics.ToList();
+            return topicList;
+        }
+
     }
 }

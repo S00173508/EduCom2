@@ -19,18 +19,18 @@ namespace EduComDataLayer
         {
             context.Topics.AddOrUpdate(t => t.TopicName, new Topic[]
                      {
-                        new Topic{ TopicName="Sports", 
-                        Posts = new List<Post>
-                        {
-                            new Post { Text="I think the running club is great"}
-                        },
-                        Members= new List<Member>
-                        {
-                            new Member {MemberName="Aoife" }
+                        new Topic{ TopicName="Sports"} 
+                        //Posts = new List<Post>
+                        //{
+                        //    new Post { Text="I think the running club is great"}
+                        //},
+                        //Members= new List<Member>
+                        //{
+                        //    new Member {MemberName="Aoife" }
 
-                        }
+                        //}
                         
-                        }
+                       
                      });
           
             base.Seed(context);
