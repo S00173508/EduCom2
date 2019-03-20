@@ -13,7 +13,6 @@ namespace EduCom2.Models
         ApplicationDbContext actx = new ApplicationDbContext();
 
        
-
         public ApplicationUser getUserByID(string id)
         {
             throw new NotImplementedException();
