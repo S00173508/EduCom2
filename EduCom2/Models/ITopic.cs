@@ -7,5 +7,6 @@ namespace EduCom2.Models
 {
     public interface ITopic
     {
+        Topic getAllTopics();
     }
 }
