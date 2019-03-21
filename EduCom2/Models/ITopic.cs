@@ -8,6 +8,9 @@ namespace EduCom2.Models
 {
     public interface ITopic
     {
-        List<Topic> GetAllTopics();
+        IEnumerable<Topic> GetAllTopics();
+
+        
+
     }
 }

@@ -16,9 +16,16 @@ namespace EduCom2.Controllers
 
         [Route("getAllTopics")]
         [HttpGet]
-        public List<Topic> getAllTopicsInfo()
+        public IEnumerable<Topic> getAllTopicsInfo()
         {
             return db.GetAllTopics();
+        }
+
+        [Route("deleteTopicMember/{memberID:int}")]
+        [HttpGet]
+        public void DeleteTopicMembers(int memberID)
+        {
+            db.DeleteTopicMember(memberID);
         }
 
 

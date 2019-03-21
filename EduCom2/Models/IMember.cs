@@ -9,7 +9,8 @@ namespace EduCom2.Models
 {
     public interface IMember
     {
-      
+        //deleting a member based on topic id
+        void DeleteTopicMember( int memberID);
 
     }
 }

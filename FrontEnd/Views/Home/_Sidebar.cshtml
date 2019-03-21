@@ -1,0 +1,19 @@
+﻿<input type="button" value="Topic Name" class="btn btn-primary" onclick="getTopics()"/>
+<ul id="topic-list" class="list-group"></ul>
+
+<script>
+    //change this to your own 
+   // var uri = 'http://localhost:59643/api/EduCom/getAllTopics'
+   // var uri = 'http://localhost:64135/api/EduComgetAllTopics' --getAllTopics'*/
+
+    //$(document).ready(function () {
+    function getTopics() {
+        $.getJSON(uri).done(function (data) {
+            $.each(data, function (key, item) {
+                $('<li>', { text: item.ID + ' : ' + item.Name }).appendTo($('#topic-list'));
+            });
+        });
+    }
+  // });
+
+</script>
