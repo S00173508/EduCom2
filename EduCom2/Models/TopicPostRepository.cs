@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EduComDataLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,12 +8,16 @@ using EduCom2.Models.DTO;
 
 namespace EduCom2.Models
 {
-    public class TopicPostRepository //: 
-        //ITopic
+    public class TopicPostRepository: ITopic
     {
-        //public Topic getAllTopics()
-        //{
+        EduContext ectx = new EduContext();
 
-        //}
+        //method to display all topics on info page
+            public List <Topic> GetAllTopics()
+        {
+            var topicList = ectx.Topics.ToList();
+            return topicList;
+        }
+
     }
 }
