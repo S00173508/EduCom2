@@ -56,7 +56,7 @@ namespace EduComDataLayer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string MemberID { get; set; }
+        public int MemberID { get; set; }
         public string MemberName { get; set; }
         public virtual ICollection<Topic> AssociatedTopic { get; set; }
 

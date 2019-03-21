@@ -4,6 +4,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using EduComDataLayer;
+using System.Linq;
 
 namespace EduCom2.Models
 {
@@ -33,6 +35,8 @@ namespace EduCom2.Models
             Database.Initialize(true);
            
         }
+
+        public IQueryable<Topic> Topics { get; internal set; }
 
         public static ApplicationDbContext Create()
         {

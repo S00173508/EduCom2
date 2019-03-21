@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace EduCom2.Models
 {
@@ -13,4 +14,25 @@ namespace EduCom2.Models
         
 
     }
+        List<Topic> GetAllTopics();
+
+        //IHttpActionResult NewPostTopicPost(Topic topic);
+
+        Topic CreateNewTopic(Topic topic);
+    }
+
+    /*
+    public IHttpActionResult NewPostTopicPost(Topic topic)
+    {
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        db.Topics.Add(topic);
+        db.SaveChanges();
+
+        return CreatedAtRoute("DefaultApi", new { id = topic.ID }, topic);
+    }*/
 }

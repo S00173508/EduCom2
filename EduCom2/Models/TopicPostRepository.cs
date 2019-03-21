@@ -24,8 +24,18 @@ namespace EduCom2.Models
         {
             Member member = ectx.Members.Find(memberID);
             ectx.Members.Remove(member);
-        }
-       
+            var topicList = ectx.Topics.ToList();
 
+            return topicList;
+        }
+
+         public Topic CreateNewTopic(Topic topic)
+        {
+            ectx.Topics.Add(topic);
+            ectx.SaveChanges();
+            return null;
+        }
+
+       
     }
 }
