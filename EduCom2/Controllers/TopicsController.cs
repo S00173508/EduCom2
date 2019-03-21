@@ -21,6 +21,14 @@ namespace EduCom2.Controllers
             return db.GetAllTopics();
         }
 
+        // POST: api/Topics
+        [Route("postTopics")]
+        public Topic PostTopic(Topic topic)
+        { 
 
+            return db.CreateNewTopic(topic);
+
+         
+        }
     }
 }

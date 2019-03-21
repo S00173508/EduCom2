@@ -22,5 +22,12 @@ namespace EduCom2.Models
         {
             throw new NotImplementedException();
         }
+
+        //method to display all members on info page
+        public List<Member> GetAllMembers()
+        {
+            var topicList = ectx.Members.ToList();
+            return topicList;
+        }
     }
 }

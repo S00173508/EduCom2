@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduComDataLayer", "EduComDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontEnd", "FrontEnd\FrontEnd.csproj", "{77C12633-762D-4347-A1DA-1765A5630020}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{D90AC29B-CE71-44BA-9329-E3BADC8DAF02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{77C12633-762D-4347-A1DA-1765A5630020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77C12633-762D-4347-A1DA-1765A5630020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77C12633-762D-4347-A1DA-1765A5630020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90AC29B-CE71-44BA-9329-E3BADC8DAF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90AC29B-CE71-44BA-9329-E3BADC8DAF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90AC29B-CE71-44BA-9329-E3BADC8DAF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90AC29B-CE71-44BA-9329-E3BADC8DAF02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

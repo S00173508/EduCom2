@@ -9,7 +9,6 @@ namespace EduCom2.Models
 {
     public interface IMember
     {
-      
-
+        List<Member> GetAllMembers();
     }
 }

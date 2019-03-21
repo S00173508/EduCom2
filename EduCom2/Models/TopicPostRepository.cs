@@ -14,8 +14,17 @@ namespace EduCom2.Models
             public List <Topic> GetAllTopics()
         {
             var topicList = ectx.Topics.ToList();
+
             return topicList;
         }
 
+         public Topic CreateNewTopic(Topic topic)
+        {
+            ectx.Topics.Add(topic);
+            ectx.SaveChanges();
+            return null;
+        }
+
+       
     }
 }
