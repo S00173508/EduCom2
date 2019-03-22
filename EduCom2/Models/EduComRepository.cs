@@ -12,7 +12,13 @@ namespace EduCom2.Models
         EduContext ectx = new EduContext();
         ApplicationDbContext actx = new ApplicationDbContext();
 
-       
+        public void DeleteTopicMember(int memberID)
+        {
+            //Member member = ectx.Members.Find(memberID);
+            //ectx.Members.Remove(member);
+        }
+
+
         public ApplicationUser getUserByID(string id)
         {
             throw new NotImplementedException();

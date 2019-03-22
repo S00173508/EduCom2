@@ -9,6 +9,11 @@ namespace EduCom2.Models
 {
     public interface ITopic
     {
+        IEnumerable<Topic> GetAllTopics();
+
+        
+
+    }
         List<Topic> GetAllTopics();
 
         //IHttpActionResult NewPostTopicPost(Topic topic);
