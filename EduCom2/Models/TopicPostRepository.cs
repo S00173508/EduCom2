@@ -13,10 +13,9 @@ namespace EduCom2.Models
         EduContext ectx = new EduContext();
 
         //method to display all topics on info page
-            public List <Topic> GetAllTopics()
-        {
-            var topicList = ectx.Topics.ToList();
-
+        public List <Topic> GetAllTopics()
+        {          
+            var topicList = ectx.Topics.ToList();          
             return topicList;
         }
 

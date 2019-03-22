@@ -30,5 +30,24 @@ namespace EduCom2.Controllers
 
          
         }
+
+
+        //    // DELETE: api/Employees/5
+        //    [Route("deleteTopics")]
+        //    public Topic DeleteTopic(int id)
+        //    {
+        //      //  Employee employee = db.Employees.Find(id);
+
+
+        //        if (employee == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        db.Employees.Remove(employee);
+        //        db.SaveChanges();
+
+        //        return Ok(employee);
+        //    }
     }
 }
