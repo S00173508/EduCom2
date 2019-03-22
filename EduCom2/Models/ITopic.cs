@@ -9,16 +9,15 @@ namespace EduCom2.Models
 {
     public interface ITopic
     {
-        IEnumerable<Topic> GetAllTopics();
 
-        
+        List<Topic> GetAllTopics();
+        Topic CreateNewTopic(Topic topic);
 
     }
-        List<Topic> GetAllTopics();
 
         //IHttpActionResult NewPostTopicPost(Topic topic);
 
-        Topic CreateNewTopic(Topic topic);
+        
     }
 
     /*
@@ -35,4 +34,3 @@ namespace EduCom2.Models
 
         return CreatedAtRoute("DefaultApi", new { id = topic.ID }, topic);
     }*/
-}

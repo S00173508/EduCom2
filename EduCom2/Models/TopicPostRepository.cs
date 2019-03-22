@@ -7,7 +7,7 @@ using EduCom2.Models.DTO;
 
 namespace EduCom2.Models
 {
-    public class TopicPostRepository: ITopic,IMember
+    public class TopicPostRepository: ITopic
     {
         EduContext ectx = new EduContext();
 
