@@ -8,6 +8,7 @@ namespace EduCom2.Models
 {
     public interface IPost
     {
-        List<Post> GetPosts();
+        List<Post> GetPosts(int topicID);
+        Post DeletePostById(int id);
     }
 }
