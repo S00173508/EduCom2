@@ -33,8 +33,20 @@ namespace EduCom2.Models
             return postList;
         }
 
+        public void NewPost(int topicId, string text)
+        {
+            ectx.Posts.Add(new Post()
+            {
+                MemberID = 1,
+                Text = text,
+                TopicId = topicId
+            });
+            ectx.SaveChanges();
 
-        
+
+        }
+
+
         public void DeleteOneById(int id)
         {
             Topic topic = this.ectx.Topics.Where(x => x.ID == id).SingleOrDefault();

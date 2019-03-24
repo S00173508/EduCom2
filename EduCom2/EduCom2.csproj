@@ -260,6 +260,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDBInitializer.cs" />
     <Compile Include="Models\DTO\MemberUserViewModel.cs" />
+    <Compile Include="Models\DTO\PostViewModel.cs" />
     <Compile Include="Models\EduComRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMember.cs" />

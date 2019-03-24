@@ -10,12 +10,15 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using EduCom2.Models;
+using EduCom2.Models.DTO;
 using EduComDataLayer;
 
 namespace EduCom2.Controllers
 {
     [RoutePrefix("api/EduCom")]
-    [EnableCors("*", "http://localhost:64135/api/EduCom/getAllPosts/", "*", "*")]
+    //[EnableCors("*", "http://localhost:64135/api/EduCom/getAllPosts/", "*", "*")]
+    [EnableCors("*", "http://localhost:64135/api/EduCom/AddPost/", "*", "*")]
+
     public class PostsController : ApiController
     {
         private EduContext db = new EduContext();
@@ -29,6 +32,47 @@ namespace EduCom2.Controllers
             return repo.GetPosts(topicID);
         }
 
+        [EnableCors("*", "http://localhost:64135/api/EduCom/AddPost/", "*", "*")]
+        [Route("AddPost/{topicId:int}/{text}")]
+        [HttpPost]
+        public IHttpActionResult PostNewPost(int topicId, string text)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+            else
+            {
+                repo.NewPost(topicId, text);
+                db.SaveChanges();
+                return Ok();
+            }
+
+
+        }
+
+
+
+        //Post: Add Post
+        //[EnableCors("*", "http://localhost:64135/api/EduCom/AddPost/", "*", "*")]
+        //[Route("AddPost")]
+        //[HttpPost]      
+        //public IHttpActionResult Post(PostViewModel post)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest("Invalid data.");
+
+        //    using (var db = new EduContext())
+        //    {
+        //        db.Posts.Add(new Post()
+        //        {
+        //            Text = post.Text,
+        //            TopicId = post.TopicId
+        //        });
+
+        //        db.SaveChanges();
+        //    }
+
+        //    return Ok();
+        //}
         //[Route("getAllPosts")]
         //[HttpGet]
         //public List<Post> getAllPosts()

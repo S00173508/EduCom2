@@ -36,7 +36,7 @@ namespace EduCom2.Controllers
         [Route("delateTopics")]
         public Topic DelateTopics(int topic)
         {
-             db.DeleteOneById(topic);
+             repo.DeleteOneById(topic);
             return null;
         }
        
