@@ -21,6 +21,13 @@ namespace EduCom2.Controllers
             return db.GetAllTopics();
         }
 
+        [Route("getTopics")]
+        [HttpGet]
+        public Topic getTopicInfo(int topicId)
+        {
+            return db.GetTopics(topicId);
+        }
+
         // POST: api/Topics
         [Route("postTopics")]
         public Topic PostTopic(Topic topic)
@@ -30,12 +37,29 @@ namespace EduCom2.Controllers
         }
         // DELETE: api/Topic
         [Route("delateTopics")]
+        [HttpGet]
         public Topic DelateTopics(int topic)
         {
-             db.DeleteOneById(topic);
-            return null;
+           return db.DeleteOneById(topic);
+             
         }
-       
+
+
+        //// DELETE: api/Employees/5
+        //[Route("delateTopics")]
+        //public IHttpActionResult DeleteEmployee(int id)
+        //{
+        //    Employee employee = db.Employees.Find(id);
+        //    if (employee == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.Employees.Remove(employee);
+        //    db.SaveChanges();
+
+        //    return Ok(employee);
+        //}
 
 
         //[Route("deleteTopicMember/{memberID:int}")]
