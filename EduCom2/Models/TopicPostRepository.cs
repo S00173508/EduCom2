@@ -7,7 +7,7 @@ using EduCom2.Models.DTO;
 
 namespace EduCom2.Models
 {
-    public class TopicPostRepository: ITopic
+    public class TopicPostRepository: ITopic,IPost
     {
         EduContext ectx = new EduContext();
 
@@ -45,14 +45,25 @@ namespace EduCom2.Models
 
 
         }
+        public Post DeletePostById(int id)
+        {
+            Post post = this.ectx.Posts.Where(x => x.ID == id).SingleOrDefault();
+            this.ectx.Posts.Remove(post);
+            this.ectx.SaveChanges();
+            return null;
+        }
 
-
-        public void DeleteOneById(int id)
+        public Topic DeleteOneById(int id)
         {
             Topic topic = this.ectx.Topics.Where(x => x.ID == id).SingleOrDefault();
             this.ectx.Topics.Remove(topic);
             this.ectx.SaveChanges();
+            return null;
         }
-
+        public Topic GetTopics(int id)
+        {
+            var post = ectx.Topics.Find(id);
+            return post;
+        }
     }
 }

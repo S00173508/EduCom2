@@ -73,6 +73,15 @@ namespace EduCom2.Controllers
 
         //    return Ok();
         //}
+        // DELETE: api/Topic
+        [Route("delatePosts/{postId:int}")]
+        [HttpDelete]
+        public void DelatePosts(int postId)
+        {
+            repo.DeletePostById(postId);
+
+        }
+
         //[Route("getAllPosts")]
         //[HttpGet]
         //public List<Post> getAllPosts()

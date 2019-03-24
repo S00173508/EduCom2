@@ -12,7 +12,7 @@ namespace EduCom2.Models
 
         List<Topic> GetAllTopics();
         Topic CreateNewTopic(Topic topic);
-        void DeleteOneById(int id);
+        Topic DeleteOneById(int id);
     }
 
         //IHttpActionResult NewPostTopicPost(Topic topic);

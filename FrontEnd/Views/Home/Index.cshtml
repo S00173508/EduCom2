@@ -376,6 +376,7 @@
 
         var uri1 = 'http://localhost:64135/api/EduCom/getAllPosts/';
 
+        var url2 = 'http://localhost:64135/api/EduCom/delatePosts/';
         function clearList() {
             $('#servicesContainer').empty();
         }
@@ -387,11 +388,52 @@
             $.getJSON(uri1 + topicID).done(function (data) {
 
                 $.each(data, function (key, item) {
-                    $('<li class="post">  <h4 id="name">  </h4>   <p id="post">' + item.Text + '</p>    </div></li>',
+                    $('<li class="post">  <h4 id="name">  </h4>   <p id="post">' + item.Text + 
+
+                        '<a href="" class="btn btn-default"><i class="fa fa-plus"></i>  Edit</a>' +
+                        '<a onclick="Delete(' + item.ID + ')" class="btn btn-default"><i class="fa fa-trash"></i> Delate</a>'
+
+                        +'</p></div></li>',
                         { text: item.topicID + ' : ' + item.Text }).appendTo($('#servicesContainer'));
                 });
             });
 
+        }
+
+        function Delete(id) {
+                //var person = new Object();
+                //person.name = $('#name').val();
+                //person.surname = $('#surname').val();
+
+            
+                $.ajax({
+                    url: 'http://localhost:64135/api/EduCom/delatePosts/' + id,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function (data, textStatus, xhr) {
+                        
+                         posts();
+                    }, 
+            });
+          
+        @*function Delete(id) {
+            clearList();
+             console.log(id);
+            // window.location.href = '@Url.Action("Delete","Home")/' + id;
+
+
+            $.Delete(url2 + id).done(function (data) {
+});*@
+            @*alertify.confirm('Web Api CRUD Operation', 'Are You Sure to Delete this Record?', function () {
+               
+            }
+                , null);*@
+           // alertify.prompt('Web Api CRUD Operation', 'Are You Sure to Delete this Record?',
+                @*function () {
+                window.location.href = '@Url.Action("Delete","Employees")/' + id;
+            }
+                , null);*@
+           // alertify.confirm('Confirm Message');
         }
         //function posts() {
         //    var topicID = $('#topicID').val();
