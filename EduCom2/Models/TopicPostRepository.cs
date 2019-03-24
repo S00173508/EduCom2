@@ -24,6 +24,16 @@ namespace EduCom2.Models
             ectx.SaveChanges();
             return null;
         }
+
+        // display all posts in a topic
+        public List<Post> GetPosts(int topicID)
+        {
+            var postList = ectx.Posts.ToList()
+                .Where(p => p.TopicId == topicID).ToList();
+            return postList;
+        }
+
+
         
         public Topic DeleteOneById(int id)
         {
