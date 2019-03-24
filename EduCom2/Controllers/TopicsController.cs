@@ -6,26 +6,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EduCom2.Controllers
 {
     [RoutePrefix("api/EduCom")]
+    [EnableCors("*","http://localhost:64135/api/EduCom/getAllTopics/", "*", "*")]
     public class TopicsController : ApiController
     {
-        TopicPostRepository db = new TopicPostRepository();
+        //TopicPostRepository db = new TopicPostRepository();
+
+        private TopicPostRepository repo = new TopicPostRepository();
 
         [Route("getAllTopics")]
         [HttpGet]
         public List<Topic> getAllTopicsInfo()
         {
-            return db.GetAllTopics();
+            return repo.GetAllTopics();
         }
 
         // POST: api/Topics
         [Route("postTopics")]
         public Topic PostTopic(Topic topic)
         {
-            return db.CreateNewTopic(topic);
+            return repo.CreateNewTopic(topic);
          
         }
 

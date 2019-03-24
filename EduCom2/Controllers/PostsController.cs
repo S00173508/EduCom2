@@ -7,14 +7,34 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using EduCom2.Models;
 using EduComDataLayer;
 
 namespace EduCom2.Controllers
 {
+    [RoutePrefix("api/EduCom")]
+    [EnableCors("*", "http://localhost:64135/api/EduCom/getAllPosts/", "*", "*")]
     public class PostsController : ApiController
     {
         private EduContext db = new EduContext();
+        private TopicPostRepository repo = new TopicPostRepository();
+
+
+        [Route("getAllPosts/{topicID:int}")]
+        [HttpGet]
+        public List<Post> getAllPosts(int topicID)
+        {
+            return repo.GetPosts(topicID);
+        }
+
+        //[Route("getAllPosts")]
+        //[HttpGet]
+        //public List<Post> getAllPosts()
+        //{
+        //    return repo.GetPosts();
+        //}
 
         // GET: api/Posts
         public IQueryable<Post> GetPosts()
