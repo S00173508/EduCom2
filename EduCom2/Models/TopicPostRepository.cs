@@ -33,8 +33,14 @@ namespace EduCom2.Models
             return postList;
         }
 
+        public Post DeletePostById(int id)
+        {
+            Post post = this.ectx.Posts.Where(x => x.ID == id).SingleOrDefault();
+            this.ectx.Posts.Remove(post);
+            this.ectx.SaveChanges();
+            return null;
+        }
 
-        
         public Topic DeleteOneById(int id)
         {
             Topic topic = this.ectx.Topics.Where(x => x.ID == id).SingleOrDefault();

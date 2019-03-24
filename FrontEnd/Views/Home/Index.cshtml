@@ -219,7 +219,10 @@
             $.getJSON(uri1 + topicID).done(function (data) {
 
                 $.each(data, function (key, item) {
-                    $('<li class="post">  <h4 id="name">  </h4>   <p id="post">' + item.Text + '</p>    </div></li>',
+                    $('<li class="post">  <h4 id="name">  </h4>   <p id="post">' + item.Text + 
+
+                           '<a href="" class="btn btn-default"><i class="fa fa-plus"></i>  Edit</a></p>'
+                        +'</div></li>',
                         { text: item.topicID + ' : ' + item.Text }).appendTo($('#servicesContainer'));
                 });
             });
