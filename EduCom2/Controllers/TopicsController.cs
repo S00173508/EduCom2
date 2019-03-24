@@ -29,7 +29,7 @@ namespace EduCom2.Controllers
         [HttpGet]
         public Topic getTopicInfo(int topicId)
         {
-            return db.GetTopics(topicId);
+            return repo.GetTopics(topicId);
         }
 
         // POST: api/Topics
@@ -40,11 +40,11 @@ namespace EduCom2.Controllers
          
         }
         // DELETE: api/Topic
-        [Route("delateTopics")]
-        [HttpGet]
-        public Topic DelateTopics(int topic)
+        [Route("delateTopics/{topicId:int}")]
+        [HttpDelete]
+        public void DelateTopics(int topicId)
         {
-           return db.DeleteOneById(topic);
+            repo.DeleteOneById(topicId);
              
         }
 
