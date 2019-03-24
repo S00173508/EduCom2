@@ -34,5 +34,13 @@ namespace EduCom2.Models
         }
 
 
+        
+        public void DeleteOneById(int id)
+        {
+            Topic topic = this.ectx.Topics.Where(x => x.ID == id).SingleOrDefault();
+            this.ectx.Topics.Remove(topic);
+            this.ectx.SaveChanges();
+        }
+
     }
 }

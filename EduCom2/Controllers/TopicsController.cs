@@ -32,6 +32,15 @@ namespace EduCom2.Controllers
             return repo.CreateNewTopic(topic);
          
         }
+        // DELETE: api/Topic
+        [Route("delateTopics")]
+        public Topic DelateTopics(int topic)
+        {
+             db.DeleteOneById(topic);
+            return null;
+        }
+       
+
 
         //[Route("deleteTopicMember/{memberID:int}")]
         //[HttpGet]
