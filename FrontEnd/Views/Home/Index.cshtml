@@ -105,7 +105,7 @@
         padding-right: 0px;
         padding-left: 20px;
         height: 30px;
-        width: 150px;
+        width: 350px;
     }
 
     #col2 {
@@ -149,9 +149,9 @@
     <script src="~/signalr/hubs"></script>
     <script>
         function addPostHtml(postModel) {
-            var postHtml = ` <li class="post" id=${postModel.Id}>
-                                                     <h3 id="cardid" style="display:none">${postModel.Id}</h3>
-                                                     <h4 id="name"> ${postModel.topicID}</h4>
+            var postHtml = ` <li class="post" id=${postModel.topicId}>
+                                                     <h3 id="cardid" style="display:none">${postModel.topicId}</h3>
+                                                     <h4 id="name"> ${postModel.topicId}</h4>
                                                      <p id="post">${postModel.text}</p>
                                                      </div>
                                                      </li>`;
@@ -178,12 +178,11 @@
 
          function createPost() {
             //var id = 1;
-            var topicID = 1;           
-            var text = $("#text").val();
-            var newpost = { "TopicId": topicID, "Text": text };
-             
+             var topicId = $("#topicId").val(); 
+             var text = $("#text").val();
+             var newpost = { "TopicId": topicId, "Text": text };             
            // alert(newpost);
-             var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicID + "/" + text;
+             var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicId + "/" + text;
 
         $.ajax({
                 type: "POST",
@@ -192,19 +191,19 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(newpost),
                 dataType: "json",
-                processData: true,
+                processData: true,           
                 //error: function (jqXHR, textStatus, errorThrown) {
                 //    alert("Something went wrong!");
                 //},
-            success: function (data, status) {
-                posts().appendTo($('#servicesContainer'));
-                addPostHtml(postModel)
+                success: function (data, status) {
+                alert("yes");
+                posts();
+              //  addPostHtml(postModel)
                     //console.log(#topicID).val("");
-                    //$("#topicID").val("");
-                    //$("#text").val("");
+                    $("#topicId").val("");
+                    $("#text").val("");
                 }
-            });
-        
+            });     
         }
 
         var uri = 'http://localhost:64135/api/EduCom/getAllTopics/';
@@ -226,18 +225,20 @@
         });
         }
 
-        var uri1 = 'http://localhost:64135/api/EduCom/getAllPosts/';
+       
 
         var url2 = 'http://localhost:64135/api/EduCom/delatePosts/';
+
+        var uri1 = 'http://localhost:64135/api/EduCom/getAllPosts/';
         function clearList() {
             $('#servicesContainer').empty();
         }
 
         function posts() {
-            clearList();
+          //  clearList();
            // document.getElementById('#topicID').value = ID;
-            var topicID = $('#topicID').val();
-            $.getJSON(uri1 + topicID).done(function (data) {
+            var topicId = $('#topicId').val();
+            $.getJSON(uri1 + topicId).done(function (data) {
 
                 $.each(data, function (key, item) {
                     $('<li class="post">  <h4 id="name">  </h4>   <p id="post">' + item.Text + 
@@ -246,7 +247,7 @@
                         '<a onclick="Delete(' + item.ID + ')" class="btn btn-default"><i class="fa fa-trash"></i> Delate</a>'
 
                         +'</p></div></li>',
-                        { text: item.topicID + ' : ' + item.Text }).appendTo($('#servicesContainer'));
+                        { text: item.topicId + ' : ' + item.Text }).appendTo($('#servicesContainer'));
                 });
             });
 
@@ -311,7 +312,7 @@
             <h2><strong>Choose A Topic</strong></h2>
             <div>
                 <label>Select by id:</label>
-                <input type="text" id="topicID" size="7" />
+                <input type="text" id="topicId" size="7" />
                 <button type="button" class="btn btn-primary btn-md" onclick="posts()">View Posts</button>
             </div>
             @*<input type="button" value="Get Topics" class="btn btn-primary" onclick="getTopics()" />*@
@@ -329,13 +330,15 @@
                         <h1> <strong>Write Your Post Here</strong></h1>
                     </div>
                     <div class="row1">
-                        <div class="col-xs-1 col-sm-1 col-md-1" id="col1">
-                            <label for="name">Your Name</label>
-                            <input type="text" class="form-control" name="topicID" id="topicID" placeholder="Your Name">
+                        <div class="col-xs-3 col-sm-3 col-md-3" id="col1">
+                            <label for="post">Your Post</label>
+                            <textarea class="form-control rounded-0" name="text" id="text"  rows="1" placeholder="add post here"></textarea>
+                            @*<label for="name">Topic ID</label>*@
+                            @*<input type="number" class="form-control" name="topicId" id="topicId" placeholder="Your Name">*@
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1" id="col2">
-                            <label for="post">Your Post</label>
-                            <textarea class="form-control rounded-0" name="text" id="text" rows="1" placeholder="add text here"></textarea>
+                            @*<label for="post">Your Post</label>
+                            <textarea class="form-control rounded-0" name="text" id="text" rows="1" placeholder="add text here"></textarea>*@
                         </div>
                     </div>
 
@@ -343,7 +346,7 @@
                         <div class="col-xs-1 col-sm-1 col-md-1" id="col3">
                             <span id="button1 ">
                                 @*<button type="button" id="post" method="POST" onclick="addNewPost()" class="btn btn-primary btn-md"><strong>Add</strong></button>*@
-                                <button type="button" id="post" onclick="createPost()" method="POST" class="btn btn-primary btn-md"><strong>Add</strong></button>
+                                <button type="button" id="post" onclick="createPost()" class="btn btn-primary btn-md"><strong>Add</strong></button>
 
                             </span>
                         </div>
