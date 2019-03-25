@@ -112,12 +112,13 @@ namespace EduCom2.Controllers
 
         //Put: Update a Previous Post
         [EnableCors("*", "http://localhost:64135/api/EduCom/UpdatePost/", "*", "*")]
-        [Route("UpdatePost/{id:int}/{topicId:int}")]
+        [Route("UpdatePost/{id:int}/{topicId:int}/{text}")]
         [HttpPut]
-        public void PutPost(int id, int topicId, [FromBody]Post post)
+        public void PutPost(int id, int topicId, string text,[FromBody]Post post)
         {
             post.ID = id;
             post.TopicId = topicId;
+            post.Text = text;
             if (post == null)/*(!repo.Update(post))*/
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
