@@ -10,9 +10,9 @@ namespace EduCom2.Models
     {
         List<Post> GetPosts(int topicID);
         Post DeletePostById(int id);
-        List<Post> GetPosts();
+       // List<Post> GetPosts();
 
-        List<Post>Post();
+      //  List<Post>Post();
         void NewPost(int topicId, string text);
 
     }

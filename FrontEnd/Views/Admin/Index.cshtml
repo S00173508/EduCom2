@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+<style>
+
+    #delete {
+        float: right;
+        margin-bottom: 50px;
+    }
+
+    .post {
+        color: #000000;
+        background-color: #D3D3D3;
+        width: 350px;
+        height: 40px;
+        display: inline-block;
+        position: inherit;
+        padding-right: 6px;
+        padding-left: 6px;
+        border: 1px solid #2574A9;
+        border-radius: 4px;
+        list-style: none;
+    }
+
+    #members-list {
+        padding-left: 0px;
+        display: block;
+        float: inherit;
+        width: 230px;
+        padding-top: 3px;
+        margin: 1px;
+    }
+</style>
+
+<h2>Admin</h2>
+@section scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script>
+
+        var uri = 'http://localhost:64135/api/EduCom/getAllMembers/';
+        function clearList() {
+            $('#members-list').empty();
+        }
+        window.onload = function getTopics() {
+            clearList();
+
+            $.getJSON(uri).done(function (data) {
+
+                $.each(data, function (key, item) {
+                    //$('<button onclick="posts()">' + item.ID + '</h4> <p>' + item.TopicName + '</p> '
+                    $('<li class="post"> <h4>' + item.MemberID + ':' + item.MemberName + '</h4><a onclick="Delete(' + item.MemberID + ')" type="submit" id="delete" class="btn btn-default"> <i class="fa fa-trash"> </i> Delete</a></li>'
+
+                        , { text: item.ID + ' : ' + item.MemberName }).appendTo($('#members-list'));
+
+                    //$('<button onclick="posts()">', { text: item.ID + ' : ' + item.TopicName }).appendTo($('#class-list'));
+                });
+            });
+        }
+
+        function Delete(MemberID) {
+            //var person = new Object();
+            //person.name = $('#name').val();
+            //person.surname = $('#surname').val();
+
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/DeleteMember/' + MemberID,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (data, textStatus, xhr) {
+                    location.reload();
+                    //posts();
+                },
+
+            });
+
+        }
+
+    </script>
+}
+<div>
+    <ul id="members-list" class="listgroup" />
+    <br />
+</div>
+
+
+

@@ -13,5 +13,8 @@ namespace EduCom2.Models
         //deleting a member based on topic id
         void DeleteTopicMember( int memberID);
 
+        void DeleteMember(int mID);
+        Member GetMemberByID(int memberid);
+
     }
 }

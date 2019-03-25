@@ -159,185 +159,6 @@
         }
 
 
-
-
-
-            
-
-        //$(document).ready(function () {
-        //    $("#post").click(function () {
-        //        var Posts = new Object();
-        //        //Posts.name = $('#name').val();
-        //        //Posts.surname = $('#surname').val();
-        //        Posts.topicID = $('#Name').val();
-        //        Posts.Text = $('#Text').val();
-        //        $.ajax({
-        //            url: 'http://localhost:64135/api/EduCom/AddPost',
-        //            type: 'POST',
-        //            dataType: 'json',
-        //            data: Posts,
-        //            success: function (data, textStatus, xhr) {
-        //                console.log(data);
-        //            },
-        //            error: function (xhr, textStatus, errorThrown) {
-        //                console.log('Error in Operation');
-        //            }
-        //        });
-        //    });
-        //}); 
-
-       // function addNewPost() {
-       //     var Emp = {};
-          
-       //     Emp.Text = $("#text").val();
-       //     Emp.topicID = $("#topicID").val();
-       ////     Emp.Company = $("#txtCompany").val();
-
-       //     $.ajax({
-       //         url: '/EduCom/AddPost/',
-       //         type: "POST",
-       //         contentType: "application/json;charset=utf-8",
-       //         //data: JSON.stringify(Emp),
-       //         data: {
-       //             Text: text,
-       //             TopicId: topicID
-       //         },
-       //         dataType: "json",
-       //         success: function (response) {
-       //             alert(response);
-       //         },
-
-       //         ////error: function (x, e) {
-       //         ////    alert('Failed');
-       //         ////    alert(x.responseText);
-       //         ////    alert(x.status);
-
-       //         ////}
-       //     });
-       // }
-
-        //$(document).ready(function () {
-        //    $("#post").click(function (e) {
-
-        //        addNewPost();
-        //        e.preventDefault();
-        //    });
-        //}); 
-
-        //var uri3 = 'http://localhost:64135/api/EduCom/AddPost/';
-        //function addNewPost() {
-        //    const item = {
-        //        TopicId: $("#topicID").val(),
-        //        Text: $("#text").val(),
-        //        isComplete: false
-        //    };
-
-        //    $.ajax({
-        //        type: "POST",
-        //        accepts: "application/json",
-        //        url: uri3,
-        //        contentType: "application/json",
-        //        data: JSON.stringify(item),
-        //        error: function (jqXHR, textStatus, errorThrown) {
-        //            alert("Something went wrong!");
-        //        },
-        //        success: function (result) {
-        //            getData();
-        //            //console.log(#topicID).val("");
-        //            $("#topicID").val("");
-        //            $("#text").val("");
-        //        }
-        //    });
-        //}
-
-
-        ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-        //$(document).ready(function () {
-        //    $("#post").click(function () {
-        //        var post = new Object();
-        //        post.TopicId = 1 //$('#topicID').val();
-        //        post.Text = $('#text').val();
-        //        alert("topic id: " + post.TopicId + "text: " + post.Text);
-        //        $.ajax({
-        //            url: 'http://localhost:64135/api/EduCom/AddPost/{topicId:int}/{text}',
-        //            type: 'POST',
-        //            dataType: 'json',
-        //            data: post,
-        //            success: function (data, textStatus, xhr) {
-        //                console.log(data);
-        //            },
-        //            error: function (xhr, textStatus, errorThrown) {
-        //                console.log('Error in Operation');
-        //            }
-        //        });
-        //    });
-        //});
-
-   
-        /////close
-        //function addNewPost() {
-
-        //    var topicID = $("#topicID").val();
-        //    var text = $("#text").val();
-   
-        //    var newpost = { id: 0, topicID: topicID, text: text };
-
-        //    addPostHtml(newpost);
-        //    AddtoDb(newpost);
-        //    //  addcardsignal(newcard);
-        //  //  addposthub.server.addnewshape(newpost);
-        //}
-
-        //function AddtoDb(postModel) {
-        //    $.ajax({
-        //        contentType: 'application/json; charset=utf-8',
-        //        dataType: 'json',
-        //        url: "http://localhost:64135/api/EduCom/AddPost/",
-        //        type: 'POST',
-        //        data: JSON.stringify({ 'post': postModel }),
-        //        success: function (data) {
-        //            postModel.Id = data;
-
-
-
-        //            //addCardHtml(shapeModel);
-        //            //makeCardMove($("#" + shapeModel.Id));
-        //            //moveShapeHub.server.addNewShape(shapeModel);
-        //        }
-        //    });
-        //}
-
-
-        function createPost() {
-            //var id = 1;
-            var topicID = 1;           
-            var text = $("#text").val();
-            var newpost = { "TopicId": topicID, "Text": text };
-            alert(newpost);
-            var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicID + "/" + text;
-        $.ajax({
-                type: "POST",
-                //accepts: "application/json",
-                url: uri3,
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(newpost),
-                dataType: "json",
-                processData: true,
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Something went wrong!");
-                },
-                success: function (data, status) {
-                    posts();
-                    //console.log(#topicID).val("");
-                    //$("#topicID").val("");
-                    //$("#text").val("");
-                }
-            });
-        
-        }
-
-
-
         $(document).ready(function () {
 
             addPostHub = $.connection.addShapeHub;
@@ -354,6 +175,37 @@
         //<span id="button12 ">
         //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
         //</span>
+
+         function createPost() {
+            //var id = 1;
+            var topicID = 1;           
+            var text = $("#text").val();
+            var newpost = { "TopicId": topicID, "Text": text };
+             
+           // alert(newpost);
+             var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicID + "/" + text;
+
+        $.ajax({
+                type: "POST",
+                //accepts: "application/json",
+                url: uri3,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(newpost),
+                dataType: "json",
+                processData: true,
+                //error: function (jqXHR, textStatus, errorThrown) {
+                //    alert("Something went wrong!");
+                //},
+            success: function (data, status) {
+                posts().appendTo($('#servicesContainer'));
+                addPostHtml(postModel)
+                    //console.log(#topicID).val("");
+                    //$("#topicID").val("");
+                    //$("#text").val("");
+                }
+            });
+        
+        }
 
         var uri = 'http://localhost:64135/api/EduCom/getAllTopics/';
     function clearList() {
@@ -412,7 +264,7 @@
                     dataType: 'json',
                     success: function (data, textStatus, xhr) {
                         
-                         posts();
+                         //posts();
                     }, 
             });
           

@@ -27,6 +27,12 @@ namespace FrontEnd.Controllers
 
             return View();
         }
+        public ActionResult Admin()
+        {
+            ViewBag.Message = "Your admin page.";
+
+            return View();
+        }
 
         public ActionResult Delete(int id)
         {

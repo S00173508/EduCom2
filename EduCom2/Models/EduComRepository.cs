@@ -35,5 +35,22 @@ namespace EduCom2.Models
             var topicList = ectx.Members.ToList();
             return topicList;
         }
+
+        public Member GetMemberByID(int memberID)
+        {
+            //return members.Find(m => m.MemberID == memberID);
+            return null;
+            //return members.Find(m => m.MemberID == memberID);
+            //ectx.Members.FirstOrDefault(m => m.MemberID == memberID);
+        }
+
+        public void DeleteMember(int mID)
+        {
+            //var memberToRemove = ectx.Members.FirstOrDefault(e => e.MemberID == memberID);
+            //ectx.Members.Remove(memberToRemove);
+
+
+            //members.RemoveAll(m => m.MemberID == mID);
+        }
     }
 }
