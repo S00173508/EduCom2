@@ -326,8 +326,8 @@
         function posts() {
             clearList();
             // document.getElementById('#topicID').value = ID;
-            var topicID = $('#topicID').val();
-            $.getJSON(uri1 + topicID).done(function (data) {
+            var topicId = $('#topicId').val();
+            $.getJSON(uri1 + topicId).done(function (data) {
 
                 $.each(data, function (key, item) {
                     $('<li class="post">  <h4 id="name">  </h4>   <p id="post" class="text">' + item.Text +
@@ -344,18 +344,18 @@
 
         }
         function Edit(id) {
-            var topicID = $('#topicID').val();
-            var txt;
+            var topicId = $('#topicId').val();
+            var text;
             var person = prompt("Please enter your new text:", "Some Text");
             if (person == null || person == "") {
-                txt = "User cancelled the prompt.";
+                text = "User cancelled the prompt.";
             } else {
-                txt = person;
+                text = person;
             }
             //document.getElementById("post").innerHTML = txt;
-            console.log(txt + person);
-            var data = { id: id, topicID: topicID, text:txt }
-            var uri4 = "http://localhost:64135/api/EduCom/UpdatePost/" + id + "/" + topicID + "/" + txt;
+            //console.log(txt + person);
+            var data = { id: id, topicId: topicId, text: text }
+            var uri4 = "http://localhost:64135/api/EduCom/UpdatePost/" + id + "/" + topicId + "/" + text;
 
        
             $.ajax({
