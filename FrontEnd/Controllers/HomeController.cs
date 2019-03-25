@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace FrontEnd.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

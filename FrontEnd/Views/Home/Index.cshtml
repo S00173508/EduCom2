@@ -247,35 +247,7 @@
         //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
         //</span>
 
-         function createPost() {
-            //var id = 1;
-             var topicId = $("#topicId").val(); 
-             var text = $("#text").val();
-             var newpost = { "TopicId": topicId, "Text": text };             
-           // alert(newpost);
-             var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicId + "/" + text;
-
-        $.ajax({
-                type: "POST",
-                //accepts: "application/json",
-                url: uri3,
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(newpost),
-                dataType: "json",
-                processData: true,           
-                //error: function (jqXHR, textStatus, errorThrown) {
-                //    alert("Something went wrong!");
-                //},
-                success: function (data, status) {
-                alert("yes");
-                posts();
-              //  addPostHtml(postModel)
-                    //console.log(#topicID).val("");
-                    $("#topicId").val("");
-                    $("#text").val("");
-                }
-            });     
-        }
+     
      
 
         $(document).ready(function () {
@@ -341,8 +313,8 @@
                         { text: item.topicId + ' : ' + item.Text }).appendTo($('#servicesContainer'));
                 });
             });
-
         }
+
         function Edit(id) {
             var topicId = $('#topicId').val();
             var text;
@@ -356,20 +328,44 @@
             //console.log(txt + person);
             var data = { id: id, topicId: topicId, text: text }
             var uri4 = "http://localhost:64135/api/EduCom/UpdatePost/" + id + "/" + topicId + "/" + text;
-
-       
+            
             $.ajax({
                 url: uri4,
                 type: 'PUT',
                 dataType: 'json',
                 data: JSON.stringify(data),
                 success: function (data, textStatus, xhr) {
+                
+                    posts();
+                },
+            });
+       
+        };
+
+        function createPost(id) {
+            var topicId = $("#topicId").val();
+            var text = $("#text").val();
+            var newpost = { "TopicId": topicId, "Text": text };
+            var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicId + "/" + text;
+
+            $.ajax({
+                type: "POST",
+                //accepts: "application/json",
+                url: uri3,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(newpost),
+                dataType: "json",
+              //  processData: true,
+                //error: function (jqXHR, textStatus, errorThrown) {
+                //    alert("Something went wrong!");
+                //},
+                success: function (data, status) {
 
                     posts();
                 },
             });
+           location.reload();
         };
-      
       
 
         
@@ -404,7 +400,7 @@
                     dataType: 'json',
                     success: function (data, textStatus, xhr) {
                         
-                         //posts();
+                         posts();
                     }, 
             });
 
