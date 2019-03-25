@@ -48,6 +48,57 @@ namespace EduCom2.Controllers
              
         }
 
+       
+
+        [Route("GetMember/{memID:int}")]
+        [HttpGet]
+        public Member GetMember(int memID)
+        {
+            Member member = repo.GetMemberByID(memID);
+            if (member == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return member;
+        }
+
+    
+        // [Authorize(Roles = "Admin")]
+        [Route("DeleteMember/{memID:int}")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteMember(int memID)
+        {
+            try
+            {
+                using (EduContext ectx = new EduContext())
+                {
+                    // Member memberToRemove =  db.GetMemberByID(memID);
+                    if (memID == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Member with ID = " + memID + " not found. Cannot complete your delete request");
+                    }
+                    else
+                    {
+                        //ectx.Members.Remove(memberToRemove);
+                        // db.DeleteMember(memberToRemove);
+                        repo.DeleteMember(memID);
+                        ectx.SaveChanges();
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+            // edcx.Topics.Find(topicID).Members.Remove(edcx.Members.Find(memID));            
+        }
+
+
+
+
+
 
         //// DELETE: api/Employees/5
         //[Route("delateTopics")]

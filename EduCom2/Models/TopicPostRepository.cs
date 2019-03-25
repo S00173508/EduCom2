@@ -37,7 +37,7 @@ namespace EduCom2.Models
         {
             ectx.Posts.Add(new Post()
             {
-                MemberID = 1,
+                MemberID = 4,
                 Text = text,
                 TopicId = topicId
             });
@@ -71,6 +71,20 @@ namespace EduCom2.Models
             updatedPost.Text = post.Text;
             ectx.SaveChanges();
             return updatedPost;
+        }
+
+
+        public Member GetMemberByID(int memberID)
+        {
+          
+            return ectx.Members.FirstOrDefault(m => m.MemberID == memberID);
+        }
+
+        public void DeleteMember(int mID)
+        {
+            Member member = ectx.Members.Find(mID);
+            ectx.Members.Remove(member);
+            ectx.SaveChanges();
         }
     }
 }
