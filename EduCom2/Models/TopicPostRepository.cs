@@ -65,5 +65,12 @@ namespace EduCom2.Models
             var post = ectx.Topics.Find(id);
             return post;
         }
+        public Post Update(Post post)
+        {
+            Post updatedPost = ectx.Posts.FirstOrDefault(p => p.ID == post.ID);
+            updatedPost.Text = post.Text;
+            ectx.SaveChanges();
+            return updatedPost;
+        }
     }
 }
