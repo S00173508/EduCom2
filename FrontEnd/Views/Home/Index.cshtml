@@ -219,6 +219,10 @@
     </script>*@
     <script>
 
+        $("#post1").hide();
+        $("textarea").hide();
+        $("#text").hide();
+
         function addPostHtml(postModel) {
             var postHtml = ` <li class="post" id=${postModel.topicId}>
                                                      <h3 id="cardid" style="display:none">${postModel.topicId}</h3>
@@ -229,6 +233,23 @@
             $("#servicesContainer").append(postHtml);
         }
 
+        function joinTopicMember() {
+
+            var topicID = $('#topicId').val();
+            var MemberId = 1;
+
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/Subscribe/' + + topicID + "/" + MemberId,
+                type: 'POST',
+                dataType: 'json',
+                success: function () {
+                    alert("Subscribe");
+                },
+            });
+
+
+        }
 
         $(document).ready(function () {
 
@@ -324,6 +345,29 @@
         }
 
         function posts() {
+
+            $("#post1").hide();
+            $("textarea").hide();
+            $("#text").hide();
+
+            var topicID = $('#topicId').val();
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/getSub/' + topicID,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $("#post1").show();
+                        $("textarea").show();
+                        $("#text").show();
+                    }
+                }, error: function () {
+                }
+
+
+            });
+            
             clearList();
             // document.getElementById('#topicID').value = ID;
             var topicId = $('#topicId').val();
@@ -442,7 +486,7 @@
                             @*<input type="number" class="form-control" name="topicId" id="topicId" placeholder="Your Name">*@
                         @*</div>*@
                         <div class="col-xs-1 col-sm-1 col-md-1" id="col2">
-                            <label for="post">Your Post</label>
+                            <label id="text" for="post">Your Post</label>
                             <textarea class="form-control rounded-0" name="text" id="text" rows="1" placeholder="add text here"></textarea>
                         </div>
                     </div>
@@ -452,7 +496,7 @@
                         <span id="button1 ">
                             @*<button type="button" id="post" method="POST" onclick="addNewPost()" class="btn btn-primary btn-md"><strong>Add</strong></button>*@
                             <button type="button" id="post1" onclick="createPost()" method="POST" class="btn btn-primary btn-md"><strong>Add</strong></button>
-
+                            <button type="button" onclick="joinTopicMember()" class="btn btn-primary btn-md"><strong>Join</strong></button>
                         </span>
                     </div>
                 </div>
