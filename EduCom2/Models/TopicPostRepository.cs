@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using EduCom2.Models.DTO;
+using System.Data.Entity.Migrations;
 
 namespace EduCom2.Models
 {
@@ -25,6 +26,18 @@ namespace EduCom2.Models
             return null;
         }
 
+        public Subscribe Subscribr(Subscribe sub)
+        {
+            ectx.Subscribes.Add(sub);
+            ectx.SaveChanges();
+            return null;
+        }
+        public Topic JoinTopicMember(Topic topic)
+        {
+            this.ectx.Topics.AddOrUpdate(x => x.ID, topic);
+            this.ectx.SaveChanges();
+            return topic;
+        }
         // display all posts in a topic
         public List<Post> GetPosts(int topicID)
         {

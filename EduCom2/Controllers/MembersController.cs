@@ -12,16 +12,17 @@ using System.Web.Http;
 
 namespace EduCom2.Controllers
 {
-        [RoutePrefix("api/EduCom")]
+
+    [RoutePrefix("api/EduCom")]
     public class MembersController : ApiController
     {
         EduComRepository db = new EduComRepository();
         [Route("getAllMembers")]
-         [HttpGet]
-         public List<Member> getAllMembersInfo()
-            {
-                return db.GetAllMembers();
-            }
+        [HttpGet]
+        public List<Member> getAllMembersInfo()
+        {
+            return db.GetAllMembers();
+        }
 
         public enum AUTHSTATUS { NONE, OK, INVALID, FAILED }
 
