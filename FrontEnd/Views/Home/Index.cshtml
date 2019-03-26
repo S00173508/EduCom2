@@ -165,6 +165,7 @@
             $("#servicesContainer").append(postHtml);
         }
 
+        function joinTopicMember() {
 
         $(document).ready(function () {
 
@@ -361,18 +362,18 @@
             //console.log(txt + person);
             var data = { id: id, topicId: topicId, text: text }
             var uri4 = "http://localhost:64135/api/EduCom/UpdatePost/" + id + "/" + topicId + "/" + text;
-
-       
+            
             $.ajax({
                 url: uri4,
                 type: 'PUT',
                 dataType: 'json',
                 data: JSON.stringify(data),
                 success: function (data, textStatus, xhr) {
-
+                
                     posts();
                 },
             });
+       
         };
       
       
@@ -451,7 +452,7 @@
                             @*<input type="number" class="form-control" name="topicId" id="topicId" placeholder="Your Name">*@
                         @*</div>*@
                         <div class="col-xs-1 col-sm-1 col-md-1" id="col2">
-                            <label for="post">Your Post</label>
+                            <label id="text" for="post">Your Post</label>
                             <textarea class="form-control rounded-0" name="text" id="text" rows="1" placeholder="add text here"></textarea>
                         </div>
                     </div>

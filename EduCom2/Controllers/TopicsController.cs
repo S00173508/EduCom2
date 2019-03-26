@@ -26,7 +26,7 @@ namespace EduCom2.Controllers
             return repo.GetAllTopics();
         }
 
-        [Route("getTopics")]
+        [Route("getTopics/{topicId:int}")]
         [HttpGet]
         public Topic getTopicInfo(int topicId)
         {

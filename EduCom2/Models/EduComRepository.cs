@@ -45,6 +45,20 @@ namespace EduCom2.Models
             return topicList;
         }
 
+        public Member GetMember(int id)
+        {
+            var post = ectx.Members.Find(id);
+            return post;
+        }
+
+        public Subscribe GetSub(int id)
+        {
+
+            //Subscribe sum;
+            return ectx.Subscribes.FirstOrDefault(e => e.TopicId == id);
+            //return ectx.Subscribes.Fits(sum.TopicId=id);
+        }
+
         public Member GetMemberByID(int memberID)
         {
             //return members.Find(m => m.MemberID == memberID);
