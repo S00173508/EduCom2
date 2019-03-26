@@ -90,6 +90,8 @@ namespace EduCom2.Controllers
         //}
 
         // GET: api/Posts
+        [Route("getPosts")]
+        [HttpGet]
         public IQueryable<Post> GetPosts()
         {
 
@@ -114,18 +116,20 @@ namespace EduCom2.Controllers
         [EnableCors("*", "http://localhost:64135/api/EduCom/UpdatePost/", "*", "*")]
         [Route("UpdatePost/{id:int}/{topicId:int}/{text}")]
         [HttpPut]
-        public void PutPost(int id, int topicId, string text,[FromBody]Post post)
+        public HttpResponseMessage PutPost(int id, int topicId, string text)
         {
-            post.ID = id;
-            post.TopicId = topicId;
-            post.Text = text;
-            if (post == null)/*(!repo.Update(post))*/
+
+           // post.ID = id;
+            //post.TopicId = topicId;
+            //post.Text = text;
+            if (id == null)/*(!repo.Update(post))*/
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
             else
             {
-                repo.Update(post);
+                repo.Update(id, topicId, text);
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
 
 

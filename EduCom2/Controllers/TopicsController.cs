@@ -15,6 +15,7 @@ namespace EduCom2.Controllers
     public class TopicsController : ApiController
     {
         //TopicPostRepository db = new TopicPostRepository();
+        private EduContext db = new EduContext();
 
         private TopicPostRepository repo = new TopicPostRepository();
 
@@ -32,12 +33,33 @@ namespace EduCom2.Controllers
             return repo.GetTopics(topicId);
         }
 
-        // POST: api/Topics
-        [Route("postTopics")]
-        public Topic PostTopic(Topic topic)
+
+        [Route("Subscribe/{topic:int}/{mem:int}")]
+        public Subscribe Subscribe(int topic, int mem)
         {
-            return repo.CreateNewTopic(topic);
-         
+            Subscribe sub = new Subscribe();
+            sub.TopicId = topic;
+            sub.MemberID = mem;
+
+            return repo.Subscribr(sub);
+
+        }
+
+
+        // POST: api/Topics
+        [Route("postTopics/{topicName}")]
+        [HttpPost]
+        public IHttpActionResult PostNewTopic(string topicName)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+            else
+            {
+                repo.NewTopic(topicName);
+                db.SaveChanges();
+                return Ok();
+            }
+
         }
         // DELETE: api/Topic
         [Route("delateTopics/{topicId:int}")]

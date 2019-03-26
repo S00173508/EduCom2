@@ -25,6 +25,7 @@ namespace EduCom2.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private EduComRepository eduRepo = new EduComRepository();
 
         public AccountController()
         {
@@ -331,7 +332,7 @@ namespace EduCom2.Controllers
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            eduRepo.makeUserMember(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

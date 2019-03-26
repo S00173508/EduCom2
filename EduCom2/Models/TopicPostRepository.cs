@@ -18,11 +18,23 @@ namespace EduCom2.Models
             return topicList;
         }
 
-         public Topic CreateNewTopic(Topic topic)
+        public Subscribe Subscribr(Subscribe sub)
         {
-            ectx.Topics.Add(topic);
+            ectx.Subscribes.Add(sub);
             ectx.SaveChanges();
-            return null;
+            return sub;
+        }
+
+
+        public void NewTopic(string topicName)
+        {
+            ectx.Topics.Add(new Topic()
+            {
+                ModeratorID = 1,
+                TopicName = topicName,
+                
+            });
+            ectx.SaveChanges();
         }
 
         // display all posts in a topic
@@ -37,7 +49,7 @@ namespace EduCom2.Models
         {
             ectx.Posts.Add(new Post()
             {
-                MemberID = 4,
+                MemberID = 1,
                 Text = text,
                 TopicId = topicId
             });
@@ -65,10 +77,11 @@ namespace EduCom2.Models
             var post = ectx.Topics.Find(id);
             return post;
         }
-        public Post Update(Post post)
+        public Post Update(int id, int topicId, string text)
         {
-            Post updatedPost = ectx.Posts.FirstOrDefault(p => p.ID == post.ID);
-            updatedPost.Text = post.Text;
+            Post updatedPost = ectx.Posts.FirstOrDefault(p => p.ID == id);//post.ID);
+            updatedPost.Text = text;//post.Text;
+            updatedPost.TopicId = topicId;
             ectx.SaveChanges();
             return updatedPost;
         }

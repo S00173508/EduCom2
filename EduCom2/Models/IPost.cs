@@ -13,7 +13,7 @@ namespace EduCom2.Models
         //List<Post> GetPosts();
 
         //List<Post>Post();
-        Post Update(Post post);
+        Post Update(int id, int topicId, string text);
 
         void NewPost(int topicId, string text);
 

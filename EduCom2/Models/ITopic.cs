@@ -11,7 +11,7 @@ namespace EduCom2.Models
     {
 
         List<Topic> GetAllTopics();
-        Topic CreateNewTopic(Topic topic);
+        void NewTopic(string topicName);
         Topic DeleteOneById(int id);
     }
 

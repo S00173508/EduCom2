@@ -13,6 +13,7 @@ namespace EduCom2.Models
 {
     public class ApplicationDBInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
+        EduContext eContext = new EduContext();
         public ApplicationDBInitializer()
         {
         }
@@ -117,8 +118,27 @@ namespace EduCom2.Models
             {
                 manager.AddToRoles(ChosenAdmin.Id, new string[] { "Admin", "Member" });
             }
+
+            SeedApplicationUsersAsMembers(manager, context, eContext);
+
             base.Seed(context);
 
+        }
+        private void SeedApplicationUsersAsMembers(UserManager<ApplicationUser> manager, ApplicationDbContext appContext, EduContext eduContext)
+        {
+            Member member = new Member();
+            List<ApplicationUser> users = new List<ApplicationUser>();
+            users = appContext.Users.ToList();
+
+            foreach (var u in users)
+            {
+                eduContext.Members.AddOrUpdate(
+                    new Member
+                    {
+                        MemberName = u.UserName
+                    });
+                eduContext.SaveChanges();
+            }
         }
 
         //private void SeedMemberUsers(ApplicationDbContext context)

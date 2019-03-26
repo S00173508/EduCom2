@@ -17,6 +17,15 @@ namespace EduCom2.Models
             //Member member = ectx.Members.Find(memberID);
             //ectx.Members.Remove(member);
         }
+        public void makeUserMember(ApplicationUser user)
+        {
+            ectx.Members.Add(
+                    new Member
+                    {
+                        MemberName = user.UserName
+                    });
+            ectx.SaveChanges();
+        }
 
 
         public ApplicationUser getUserByID(string id)
@@ -52,5 +61,14 @@ namespace EduCom2.Models
 
             //members.RemoveAll(m => m.MemberID == mID);
         }
+
+        public Subscribe GetSub(int id)
+        {
+
+            //Subscribe sum;
+            return ectx.Subscribes.FirstOrDefault(e => e.TopicId == id);
+            //return ectx.Subscribes.Fits(sum.TopicId=id);
+        }
+
     }
 }

@@ -150,75 +150,11 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    @*<script>
-        $("body").on("click", ".edit", function () {
-            var post = $(this).closest(".editPost");
-            $(post).each(function () {
-                if ($(this).find("#text").length > 0) {
-                    console.log("edit button clicked");
-                    console.log(post);
-                    $(this).find("input").show();
-                    $(this).find(".text").hide();
-                    //$(this).find(".title").hide();
-                }//end of if statement
-            });
-            post.find(".Update").show();
-            post.find(".Cancel").show();
-        });
-      
-
-        $("body").on("click", ".Update", function () {
-            var post = $(this).closest(".editPost");
-
-            $(post).each(function () {
-                //if (x == card.find("#cardid").html()) {
-                //var titleInput = $(this).find("#titleInput");
-                var textInput = $(this).find("#text");
-                var text = $(this).find(".text");
-                //var title = $(this).find(".title");
-                post.find('#text').html(textInput.val());
-                //card.find('#title').html(titleInput.val());
-                text.show();
-                //title.show();
-                //titleInput.hide();
-                textInput.hide();
-                //  }//end of if
-            });
-
-            post.find(".edit").show();
-            post.find(".Cancel").hide();
-            $(this).hide();
-            var updatedPost = {};
-            //updatedCard.CardId = card.find("#cardid").html();
-            //updatedCard.Title = card.find("#title").html();
-            updatedPost.Text = card.find("#text").html();
-            //console.log("ID: " + updatedCard.CardId + "Title: "
-            //    + updatedCard.Title + "Text: " + updatedCard.Text);
-
-            $.ajax({
-                type: "PUT",
-                url: "/Home/UpdatePost",
-                data: JSON.stringify(updatedPost),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                processData: true,
-
-
-            });
-        });
-        $("body").on("click", ".Cancel", function () {
-            var post = $(this).closest(".editPost");
-            $(post).each(function () {
-                $(this).find("input").hide();
-                $(this).find(".text").show();
-                //$(this).find(".title").show();
-            });
-            post.find(".Update").hide();
-            post.find(".Cancel").hide();
-        });
-    </script>*@
+   
     <script>
-
+        $("#post1").hide();
+        $("#text").hide();
+   
         function addPostHtml(postModel) {
             var postHtml = ` <li class="post" id=${postModel.topicId}>
                                                      <h3 id="cardid" style="display:none">${postModel.topicId}</h3>
@@ -246,13 +182,31 @@
         //<span id="button12 ">
         //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
         //</span>
+        function joinTopicMember() {
+
+            var topicID = $('#topicId').val();
+            var MemberId = 1; //should be member id of who is logged in but dont work with user login
+
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/Subscribe/' + topicID + "/" + MemberId,
+                type: 'POST',
+                dataType: 'json',
+                success: function () {
+                   // alert("Subscribe");
+                },
+            });
+
+
+        }
+
 
          function createPost() {
             //var id = 1;
              var topicId = $("#topicId").val(); 
              var text = $("#text").val();
              var newpost = { "TopicId": topicId, "Text": text };             
-           // alert(newpost);
+            //alert(newpost);
              var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicId + "/" + text;
 
         $.ajax({
@@ -267,7 +221,7 @@
                 //    alert("Something went wrong!");
                 //},
                 success: function (data, status) {
-                alert("yes");
+               // alert("yes");
                 posts();
               //  addPostHtml(postModel)
                     //console.log(#topicID).val("");
@@ -319,11 +273,37 @@
         var url2 = 'http://localhost:64135/api/EduCom/delatePosts/';
 
         var uri1 = 'http://localhost:64135/api/EduCom/getAllPosts/';
+        var uri11 = 'http://localhost:64135/api/EduCom/postTopics/';
+
         function clearList() {
             $('#servicesContainer').empty();
         }
 
         function posts() {
+
+
+            $("#post1").hide();
+            $("#text").hide();
+
+            var topicID = $('#topicId').val();
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/getSub/' + topicID,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $("#post1").show();
+
+                        $("#text").show();
+                    }
+                }, error: function () {
+                    $("#inputID").show();
+                }
+
+
+            });
+
             clearList();
             // document.getElementById('#topicID').value = ID;
             var topicId = $('#topicId').val();
@@ -343,6 +323,31 @@
             });
 
         }
+
+        function createTopic() {
+
+            var topicName = $('#addTopic').val();
+            var data = { topicName: topicName }
+            //alert(topicName);
+            var uri5 = "http://localhost:64135/api/EduCom/postTopics/" + topicName;
+            $.ajax({
+                url: uri5,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (data, textStatus, xhr) {
+                    getTopics();
+                    //$.each(data, function (key, item) {
+                    //    $(
+                    //        { topicName: item.topicName }).appendTo($('#class-list'));
+                    //});
+                    //window.location.
+                },
+            });
+            
+        }
+
+        
         function Edit(id) {
             var topicId = $('#topicId').val();
             var text;
@@ -425,7 +430,11 @@
             @*<input type="button" value="Get Topics" class="btn btn-primary" onclick="getTopics()" />*@
             <ul id="class-list" class="list-group" />
             <br />
+            <div>
+                <input type="text" id="addTopic"/>
+                <button type="button" class="btn btn-primary btn-md" method="POST" onclick="createTopic()">Add Topic</button>
 
+            </div>
         @*@Html.Partial("_Sidebar")*@
     </div>
 
@@ -452,7 +461,7 @@
                         <span id="button1 ">
                             @*<button type="button" id="post" method="POST" onclick="addNewPost()" class="btn btn-primary btn-md"><strong>Add</strong></button>*@
                             <button type="button" id="post1" onclick="createPost()" method="POST" class="btn btn-primary btn-md"><strong>Add</strong></button>
-
+                            <button type="button" onclick="joinTopicMember()" class="btn btn-primary btn-md"><strong>Join</strong></button>
                         </span>
                     </div>
                 </div>
