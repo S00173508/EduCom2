@@ -38,12 +38,7 @@ namespace EduCom2.Models
             ectx.SaveChanges();
         }
 
-        public Subscribe Subscribr(Subscribe sub)
-        {
-            ectx.Subscribes.Add(sub);
-            ectx.SaveChanges();
-            return null;
-        }
+     
         public Topic JoinTopicMember(Topic topic)
         {
             this.ectx.Topics.AddOrUpdate(x => x.ID, topic);
