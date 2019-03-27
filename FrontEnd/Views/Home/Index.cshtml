@@ -1,0 +1,478 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .wrapper {
+        display: flex;
+    }
+
+    #top {
+        background-color: #2574A9;
+        font-family: 'Segoe UI';
+        color: #fff;
+        height: 60px;
+        border: 1px solid #fff;
+        border-radius: .50rem;
+        align-content: center;
+    }
+    /*#services ul {
+        display: block;
+        float: right;
+        width: 230px;
+        padding-top: 6px;
+        padding-right: 20px;
+        padding-left: 9px;
+        margin: 4px;
+    }*/
+    .addBtn {
+        background-color: #539C15
+    }
+
+    .post {
+        color: #000000;
+        background-color: #ADD8E6;
+        width: 498px;
+        height: 75px;
+        display: inline-block;
+        position: inherit;
+        padding-right: 6px;
+        padding-left: 6px;
+        border: 1px solid #2574A9;
+        border-radius: 4px;
+        list-style: none;
+    }
+
+    #sidebar {
+        float: left;
+        width: 280px;
+        /*background-color:red;
+       width:100px;
+       height:500px;*/
+    }
+
+    .align {
+        height: 1000px;
+        background-color: cornflowerblue;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        display: block;
+        float: left;
+        width: 500px;
+    }
+
+    #servicesContainer {
+        padding-left: 0px;
+        display: block;
+        float: inherit;
+        width: 230px;
+        padding-top: 3px;
+        margin: 1px;
+    }
+
+    .post h4 {
+        border-bottom: 1px dotted #6BA3A3;
+        border-top: 1px dotted #6BA3A3;
+        font-weight: 600;
+    }
+
+    .post a {
+        background-color: #F6F6F6;
+    }
+
+    .post button {
+        background-color: #F6F6F6;
+    }
+
+    .glyphicon {
+        padding-top: 5px;
+    }
+
+    .row1 {
+        height: 20px;
+        padding-bottom: 35px;
+    }
+
+    #col0 {
+        padding-right: 144px;
+        height: 30px;
+        width: 205px;
+    }
+
+    #col1 {
+        padding-right: 0px;
+        padding-left: 20px;
+        height: 30px;
+        width: 150px;
+    }
+
+    #col2 {
+        padding-right: 0px;
+        padding-left: 20px;
+        height: 50px;
+        width: 300px;
+    }
+
+    #col3 {
+        padding-right: 0px;
+        padding-left: 20px;
+        height: 50px;
+        width: 300px;
+        margin-top: 25px;
+    }
+
+    .header {
+        padding-left: 50px;
+    }
+
+    /*#partial {
+        margin-top: -350px;
+        width: 250px;
+    }*/
+    #part {
+        width: 450px;
+        margin-top: -350px;
+        /*margin-left: 150px;*/
+    }
+
+    .container {
+        width: 1500px;
+    }
+
+    #newText {
+        display: none;
+    }
+</style>
+
+@section scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        $("#post1").hide();
+        $("#text").hide();
+
+        function addPostHtml(postModel) {
+            var postHtml = ` <li class="post" id=${postModel.topicId}>
+                                                         <h3 id="cardid" style="display:none">${postModel.topicId}</h3>
+                                                         <h4 id="name"> ${postModel.topicId}</h4>
+                                                         <p id="post">${postModel.text}</p>
+                                                         </div>
+                                                         </li>`;
+            $("#servicesContainer").append(postHtml);
+        }
+
+
+        $(document).ready(function () {
+
+            addPostHub = $.connection.addShapeHub;
+
+            addPostHub.client.newShapeAdded = function (shapeModel) {
+
+                addPostHtml(shapeModel);
+            };
+
+            $.connection.hub.start().done(function () {
+                addPostHub.server.firstHandShake();
+            });
+        });
+        //<span id="button12 ">
+        //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
+        //</span>
+        function joinTopicMember() {
+
+            var topicID = $('#topicId').val();
+            var MemberId = 1; //should be member id of who is logged in but dont work with user login
+
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/Subscribe/' + topicID + "/" + MemberId,
+                type: 'POST',
+                dataType: 'json',
+                success: function () {
+                    // alert("Subscribe");
+                },
+            });
+
+
+        }
+
+
+        function createPost() {
+            //var id = 1;
+            var topicId = $("#topicId").val();
+            var text = $("#text").val();
+            var newpost = { topicId: topicId, text: text };
+            //alert(newpost);
+            var uri3 = "http://localhost:64135/api/EduCom/AddPost/" + topicId + "/" + text;
+
+            $.ajax({
+                type: "POST",
+                //accepts: "application/json",
+                url: uri3,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(newpost),
+                dataType: "json",
+                processData: true,
+                //error: function (jqXHR, textStatus, errorThrown) {
+                //    alert("Something went wrong!");
+                //},
+                success: function (data, status) {
+                    // alert("yes");
+                    posts();
+                    //  addPostHtml(postModel)
+                    //console.log(#topicID).val("");
+                    $("#topicId").val("");
+                    $("#text").val("");
+                }
+            });
+        }
+
+
+        $(document).ready(function () {
+
+            addPostHub = $.connection.addShapeHub;
+
+            addPostHub.client.newShapeAdded = function (shapeModel) {
+
+                addPostHtml(shapeModel);
+            };
+
+            $.connection.hub.start().done(function () {
+                addPostHub.server.firstHandShake();
+            });
+        });
+        //<span id="button12 ">
+        //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
+        //</span>
+
+        var uri = 'http://localhost:64135/api/EduCom/getAllTopics/';
+        function clearList() {
+            $('#class-list').empty();
+        }
+        window.onload = function getTopics() {
+            clearList();
+
+            $.getJSON(uri).done(function (data) {
+
+                $.each(data, function (key, item) {
+                    //$('<button onclick="posts()">' + item.ID + '</h4> <p>' + item.TopicName + '</p> '
+                    $('<li> <h4>' + item.ID + ':' + item.TopicName + '</h4> '
+                        , { text: item.ID + ' : ' + item.TopicName }).appendTo($('#class-list'));
+
+                    //$('<button onclick="posts()">', { text: item.ID + ' : ' + item.TopicName }).appendTo($('#class-list'));
+                });
+            });
+        }
+
+
+
+        var url2 = 'http://localhost:64135/api/EduCom/delatePosts/';
+
+        var uri1 = 'http://localhost:64135/api/EduCom/getAllPosts/';
+        var uri11 = 'http://localhost:64135/api/EduCom/postTopics/';
+
+        function clearList() {
+            $('#servicesContainer').empty();
+        }
+
+        function posts() {
+
+
+            $("#post1").hide();
+            $("#text").hide();
+
+            var topicID = $('#topicId').val();
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/getSub/' + topicID,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $("#post1").show();
+
+                        $("#text").show();
+                    }
+                }, error: function () {
+                    $("#inputID").show();
+                }
+
+
+            });
+
+            clearList();
+            // document.getElementById('#topicID').value = ID;
+            var topicId = $('#topicId').val();
+            $.getJSON(uri1 + topicId).done(function (data) {
+
+                $.each(data, function (key, item) {
+                    $('<li class="post">  <h4 id="name">  </h4>   <p id="post" class="text">' + item.Text +
+
+                        '<a onclick="Edit(' + item.ID + ')" class="btn btn -default " id="editPost">Edit</a>' +
+                        '<input type="submit"  id="newText" />' +
+
+                        '<a onclick="Delete(' + item.ID + ')" class="btn btn-default"><i class="fa fa-trash"></i>Delete</a>'
+
+                        + '</p></div></li>',
+                        { text: item.topicId + ' : ' + item.Text }).appendTo($('#servicesContainer'));
+                });
+            });
+
+        }
+
+        function createTopic() {
+
+            var topicName = $('#addTopic').val();
+            var data = { topicName: topicName }
+            //alert(topicName);
+            var uri5 = "http://localhost:64135/api/EduCom/postTopics/" + topicName;
+            $.ajax({
+                url: uri5,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (data, textStatus, xhr) {
+                    getTopics();
+                    //$.each(data, function (key, item) {
+                    //    $(
+                    //        { topicName: item.topicName }).appendTo($('#class-list'));
+                    //});
+                    //window.location.
+                },
+            });
+
+        }
+
+
+        function Edit(id) {
+            var topicId = $('#topicId').val();
+            var text;
+            var person = prompt("Please enter your new text:", "Some Text");
+            if (person == null || person == "") {
+                text = "User cancelled the prompt.";
+            } else {
+                text = person;
+            }
+            //document.getElementById("post").innerHTML = txt;
+            //console.log(txt + person);
+            var data = { id: id, topicId: topicId, text: text }
+            var uri4 = "http://localhost:64135/api/EduCom/UpdatePost/" + id + "/" + topicId + "/" + text;
+
+
+            $.ajax({
+                url: uri4,
+                type: 'PUT',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: function (data, textStatus, xhr) {
+
+                    posts();
+                },
+            });
+        }
+
+
+
+
+
+        //$("#view").on("click", function () {
+        //    //var post = $(this).closest(".editPost");
+        //    //$(post).each(function () {
+        //    //    if ($(this).find("#text").length > 0) {
+        //    console.log("edit button clicked");
+        //    //console.log(post);
+        //    //$(this).find("input").show();
+        //    //$(this).find(".text").hide();
+        //    //$(this).find(".title").hide();
+        //});//end of if statement
+        //    //});
+        ////});
+
+
+        //<a class="Update" href="javascript:;" style="display:none">Update</a>
+        //    <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+
+
+        function Delete(id) {
+            //var person = new Object();
+            //person.name = $('#name').val();
+            //person.surname = $('#surname').val();
+
+
+            $.ajax({
+                url: 'http://localhost:64135/api/EduCom/delatePosts/' + id,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (data, textStatus, xhr) {
+
+                    posts();
+                },
+            });
+
+        }
+
+    </script>
+}
+<div class="container">
+    @*<div class="row">*@
+
+    <div class="col-xs-2 col-sm-2 col-md-2" id="sidebar">
+        <h2><strong>Choose A Topic</strong></h2>
+        <div>
+            <label>Select by id:</label>
+            <input type="text" id="topicId" size="7" />
+            <button type="button" class="btn btn-primary btn-md" onclick="posts()">View Posts</button>
+        </div>
+        @*<input type="button" value="Get Topics" class="btn btn-primary" onclick="getTopics()" />*@
+        <ul id="class-list" class="list-group" />
+        <br />
+        <div>
+            <input type="text" id="addTopic" />
+            <button type="button" class="btn btn-primary btn-md" method="POST" onclick="createTopic()">Add Topic</button>
+
+        </div>
+        @*@Html.Partial("_Sidebar")*@
+    </div>
+
+
+    <div class="col-xs-5 col-sm-5 col-md-5">
+        <div class="align">
+            <form method="post">
+                <div class="header">
+                    <h1> <strong>Write Your Post Here</strong></h1>
+                </div>
+                <div class="row1">
+                    @*<div class="col-xs-1 col-sm-1 col-md-1" id="col1">*@
+                    @*<label for="name">Topic ID</label>*@
+                    @*<input type="number" class="form-control" name="topicId" id="topicId" placeholder="Your Name">*@
+                    @*</div>*@
+                    <div class="col-xs-1 col-sm-1 col-md-1" id="col2">
+                        <label for="post">Your Post</label>
+                        <textarea class="form-control rounded-0" name="text" id="text" rows="1" placeholder="add text here"></textarea>
+                    </div>
+                </div>
+
+                <div class="row1">
+                    <div class="col-xs-1 col-sm-1 col-md-1" id="col3">
+                        <span id="button1 ">
+                            @*<button type="button" id="post" method="POST" onclick="addNewPost()" class="btn btn-primary btn-md"><strong>Add</strong></button>*@
+                            <button type="button" id="post1" onclick="createPost()" method="POST" class="btn btn-primary btn-md"><strong>Add</strong></button>
+                            <button type="button" onclick="joinTopicMember()" class="btn btn-primary btn-md"><strong>Join</strong></button>
+                        </span>
+                    </div>
+                </div>
+
+                <ul id="servicesContainer"></ul>
+            </form>
+        </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3" id="part">
+        <div id="partial">@Html.Partial("_InfoPage")</div>
+    </div>
+    @*</div>*@
+</div>
