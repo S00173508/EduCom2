@@ -147,10 +147,6 @@
 </style>
 
 @section scripts {
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
-    <script src="~/signalr/hubs"></script>
 
     <script>
         $("#post1").hide();
@@ -231,21 +227,6 @@
                 }
             });
         }
-
-
-        $(document).ready(function () {
-
-            addPostHub = $.connection.addShapeHub;
-
-            addPostHub.client.newShapeAdded = function (shapeModel) {
-
-                addPostHtml(shapeModel);
-            };
-
-            $.connection.hub.start().done(function () {
-                addPostHub.server.firstHandShake();
-            });
-        });
         //<span id="button12 ">
         //    <button type="button" class="btn addBtn " onclick="saveCards()">Save</button>
         //</span>
